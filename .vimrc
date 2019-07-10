@@ -67,6 +67,7 @@ set smartcase
 set incsearch
 set wrapscan
 set hlsearch
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " nobeeep
 set noerrorbells
