@@ -50,6 +50,7 @@ alias ..='c ../'
 alias back='pushd'
 alias diff='diff -U1'
 
+# prompt
 PROMPT="%(?.%{${fg[green]}%}.%{${fg[red]}%})%n${reset_color}@${fg[blue]}%m${reset_color}(%*%) %~
 %# "
 
@@ -64,13 +65,15 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
+# pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-
+# tmux
 PERCOL='fzf'
 if [[ ! -n $TMUX ]]; then
   # get the IDs
