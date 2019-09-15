@@ -10,7 +10,7 @@ autoload -Uz colors; colors
 
 autoload -Uz compinit; compinit
 
-bindkey -e
+bindkey -v
 
 setopt share_history
 
