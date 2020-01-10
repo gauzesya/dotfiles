@@ -30,6 +30,8 @@ Plug 'justmao945/vim-clang', {'for': 'cpp'}
 
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
+Plug 'lervag/vimtex', {'for': 'tex'}
+
 call plug#end()
 
 
@@ -47,7 +49,7 @@ set hidden
 set enc=utf-8
 
 " clopboard
-set clipboard=unnamed,autoselect
+set clipboard+=unnamed,autoselect
 
 " looklike
 set showcmd
@@ -95,6 +97,14 @@ nnoremap <silent>sj <c-w>j
 nnoremap <silent>sk <c-w>k
 nnoremap <silent>sl <c-w>l
 
+
+" spell check for latex
+augroup spell_check
+    autocmd!
+    autocmd FileType tex setlocal spell
+augroup END
+
+
 " colorscheme
 set background=dark
 try
@@ -139,14 +149,22 @@ let NERDTreeShowBookmarks=1
 " vim-quickrun
 nnoremap <silent> <Leader>q :QuickRun<CR>
 nnoremap <silent> <Leader><Leader>q :QuickRun -input =@+<CR>
-set splitbelow
 let g:quickrun_config = {
 \   '_' : {
-\     'runner' : 'job'
+\     'runner' : 'job',
+\     'outputter/buffer/split'  : ':rightbelow 8sp',
 \   },
 \   'cpp' : {
 \     'command': 'g++',
 \     'cmdopt': '-std=c++14 -Wall -g'
+\   },
+\   'tex' : {
+\     'command': 'latexmk',
+\     'cmdopt': '-pvc',
+\     'outputter' : 'error',
+\     'outputter/error/success' : 'null',
+\     'outputter/error/error' : 'quickfix',
+\     'exec': '%c %o %a %s',
 \   },
 \}
 
