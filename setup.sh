@@ -13,8 +13,6 @@ fi
 
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 export PATH="~/.pyenv/bin:$PATH"
-pyenv install anaconda3-5.3.1
-pyenv global anaconda3-5.3.1
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all --no-update-rc

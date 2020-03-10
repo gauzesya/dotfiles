@@ -1,7 +1,7 @@
 pythonx << EOF
 import subprocess
 import sys
-path = subprocess.run(['python','-c','import site; print(site.getsitepackages()[0])'],
+path = subprocess.run(['python','-c','from __future__ import print_function; import site; print(site.getsitepackages()[0])'],
                       stdout=subprocess.PIPE).stdout
 path = path.strip()
 path = path.decode('utf-8')
