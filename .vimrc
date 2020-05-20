@@ -2,8 +2,7 @@
 
 " requirements
 " curl, git, powerline_font
-" clang for c++
-" jedi, flake8 for python
+" jedi, flake8, autopep8, black, isort for python
 
 
 " plugin
@@ -25,8 +24,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
-
-Plug 'justmao945/vim-clang', {'for': 'cpp'}
 
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
@@ -133,13 +130,12 @@ let g:ale_fix_on_save = 1
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_linters = {
-    \ 'cpp': ['clang'],
     \ 'python': ['flake8'],
     \ }
-
 let g:ale_fixers = {
-    \ 'cpp': ['clang-format'],
+    \ 'python': ['autopep8', 'black', 'isort'],
     \ }
+
 
 " nerdtree
 nnoremap <Leader>f :NERDTreeToggle<CR>
@@ -153,18 +149,6 @@ let g:quickrun_config = {
 \   '_' : {
 \     'runner' : 'job',
 \     'outputter/buffer/split'  : ':rightbelow 8sp',
-\   },
-\   'cpp' : {
-\     'command': 'g++',
-\     'cmdopt': '-std=c++14 -Wall -g'
-\   },
-\   'tex' : {
-\     'command': 'latexmk',
-\     'cmdopt': '-pvc',
-\     'outputter' : 'error',
-\     'outputter/error/success' : 'null',
-\     'outputter/error/error' : 'quickfix',
-\     'exec': '%c %o %a %s',
 \   },
 \}
 
@@ -185,12 +169,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
-
-
-" vim-clang
-let g:clang_auto=0
-let g:clang_cpp_options='-std=c++14 -stdlib=libc++ -Wno-everything'
-let g:clang_cpp_completeopt='longest,menuone'
 
 
 " jedi-vim
