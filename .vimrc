@@ -27,8 +27,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
-Plug 'lervag/vimtex', {'for': 'tex'}
-
 call plug#end()
 
 
@@ -95,13 +93,6 @@ nnoremap <silent>sk <c-w>k
 nnoremap <silent>sl <c-w>l
 
 
-" spell check for latex
-augroup spell_check
-    autocmd!
-    autocmd FileType tex setlocal spell
-augroup END
-
-
 " colorscheme
 set background=dark
 try
@@ -126,7 +117,7 @@ let g:ale_sign_column_always=1
 let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
 let g:ale_lint_on_enter=0
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_linters = {
