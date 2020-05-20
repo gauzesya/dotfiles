@@ -1,4 +1,4 @@
-pythonx << EOF
+python << EOF
 import subprocess
 import sys
 path = subprocess.run(['python','-c','from __future__ import print_function; import site; print(site.getsitepackages()[0])'],
