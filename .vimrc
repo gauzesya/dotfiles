@@ -20,12 +20,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'thinca/vim-quickrun'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'jmcantrell/vim-virtualenv'
 
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
 
 call plug#end()
 
@@ -70,12 +73,14 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 set noerrorbells
 set vb t_vb=
 
+
 " no auto-commentout
 augroup auto_comment_off
   autocmd!
   autocmd BufEnter * setlocal formatoptions-=r
   autocmd BufEnter * setlocal formatoptions-=o
 augroup END
+
 
 " move
 nnoremap j gj
@@ -120,11 +125,14 @@ let g:ale_lint_on_enter=0
 let g:ale_fix_on_save = 0
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+nnoremap <Leader>h :ALEFix<CR>
 let g:ale_linters = {
     \ 'python': ['flake8'],
+    \ 'rust': ['rustc', 'cargo'],
     \ }
 let g:ale_fixers = {
     \ 'python': ['autopep8', 'black', 'isort'],
+    \ 'rust': ['rustfmt'],
     \ }
 
 
@@ -144,13 +152,6 @@ let g:quickrun_config = {
 \}
 
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-
 " ctrlp
 let g:ctrlp_map = '<Nop>'
 nnoremap sb :<C-u>CtrlPBuffer<CR>
@@ -162,9 +163,11 @@ let g:ctrlp_extensions = ['tag']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
 
 
-" jedi-vim
-autocmd FileType python setlocal completeopt-=preview
-let g:jedi#popup_on_dot=0
+" asyncomplete
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+imap <C-e> <Plug>(asyncomplete_force_refresh)
 
 
 " load own vimrc
