@@ -47,7 +47,7 @@ set hidden
 set enc=utf-8
 
 " clopboard
-set clipboard+=unnamed,autoselect
+set clipboard+=unnamed
 
 " looklike
 set showcmd
@@ -168,6 +168,14 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 imap <C-e> <Plug>(asyncomplete_force_refresh)
+
+
+" vim-lsp
+let g:lsp_diagnostics_enabled = 0
+nnoremap <C-]> :<C-u>LspDefinition<CR>
+nnoremap K :<C-u>LspHover<CR>
+nnoremap <Leader>R :<C-u>LspRename<CR>
+nnoremap <Leader>n :<C-u>LspReferences<CR>
 
 
 " load own vimrc
