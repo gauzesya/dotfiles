@@ -2,7 +2,8 @@
 
 " requirements
 " curl, git, powerline_font
-" jedi, flake8, autopep8, black, isort for python
+" flake8, autopep8, black, isort for python
+" clojure-lsp, clj-kondo for clojure
 
 
 " plugin
@@ -129,10 +130,12 @@ nnoremap <Leader>h :ALEFix<CR>
 let g:ale_linters = {
     \ 'python': ['flake8'],
     \ 'rust': ['rustc', 'cargo'],
+    \ 'clojure': ['clj-kondo'],
     \ }
 let g:ale_fixers = {
     \ 'python': ['autopep8', 'black', 'isort'],
     \ 'rust': ['rustfmt'],
+    \ 'clojure': ['clj-kondo'],
     \ }
 
 
