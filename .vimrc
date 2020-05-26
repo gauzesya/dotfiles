@@ -114,8 +114,17 @@ syntax on
 set laststatus=2
 let g:airline_theme='molokai'
 let g:airline_powerline_fonts=1
+let g:airline_section_c = '%t'
+let g:airline_section_x = '%{&filetype}'
+let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#virtualenv#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#error_symbol = ' '
+let g:airline#extensions#ale#warning_symbol = ' '
 
 
 " ale
@@ -124,8 +133,11 @@ let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
 let g:ale_lint_on_enter=0
 let g:ale_fix_on_save = 0
-nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_sign_error = ' '
+let g:ale_sign_warning = ' '
+let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <Leader>h :ALEFix<CR>
 let g:ale_linters = {
     \ 'python': ['flake8'],
