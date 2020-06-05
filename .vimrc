@@ -23,13 +23,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'thinca/vim-quickrun'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
+
+Plug 'jmcantrell/vim-virtualenv'
 
 call plug#end()
 
@@ -122,9 +123,6 @@ let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#virtualenv#enabled = 1
-"let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#ale#error_symbol = ' '
-let g:airline#extensions#ale#warning_symbol = ' '
 
 
 " ale
@@ -133,8 +131,6 @@ let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
 let g:ale_lint_on_enter=0
 let g:ale_fix_on_save = 0
-let g:ale_sign_error = ' '
-let g:ale_sign_warning = ' '
 let g:ale_echo_msg_format = '[%linter%]%code: %%s'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
