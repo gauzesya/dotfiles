@@ -15,7 +15,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tomasr/molokai'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
@@ -103,7 +103,7 @@ nnoremap <silent>sl <c-w>l
 " colorscheme
 set background=dark
 try
-  colorscheme molokai
+  colorscheme onedark
 catch
   colorscheme elflord
 endtry
