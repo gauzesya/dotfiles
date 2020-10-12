@@ -1,7 +1,3 @@
-setopt IGNOREEOF
-unsetopt BEEP
-umask 022
-
 export LANG=ja_JP.UTF-8
 
 export PATH="$HOME/bin:$PATH"
@@ -9,6 +5,10 @@ export PATH="$HOME/bin:$PATH"
 autoload -Uz colors; colors
 
 autoload -Uz compinit; compinit
+
+setopt IGNOREEOF
+
+unsetopt BEEP
 
 bindkey -v
 
@@ -35,10 +35,20 @@ alias -g G='| grep'
 alias -g GI='| grep -ri'
 
 
-alias ls='ls --color=auto'
-alias lst='ls -ltr --color=auto'
-alias la='ls -la --color=auto'
-alias ll='ls -l --color=auto'
+case ${OSTYPE} in
+  darwin*)
+    alias ls='ls -G'
+    alias lst='ls -ltr -G'
+    alias la='ls -la -G'
+    alias ll='ls -l -G'
+    ;;
+  linux*)
+    alias ls='ls --color=auto'
+    alias lst='ls -ltr --color=auto'
+    alias la='ls -la --color=auto'
+    alias ll='ls -l --color=auto'
+    ;;
+esac
 alias so='source'
 alias v='vim'
 alias vi='vim'
@@ -69,6 +79,7 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

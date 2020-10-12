@@ -2,8 +2,6 @@
 
 " requirements
 " curl, git, powerline_font
-" flake8, autopep8, black, isort for python
-" clojure-lsp, clj-kondo for clojure
 
 
 " plugin
@@ -18,11 +16,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'thinca/vim-quickrun'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-expand-region'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
@@ -37,7 +37,6 @@ call plug#end()
 
 " leader
 let mapleader="\<Space>"
-
 
 " file
 set nobackup
@@ -54,7 +53,7 @@ set clipboard+=unnamed
 " looklike
 set showcmd
 set number
-set cursorline
+set signcolumn=yes
 set showmatch
 
 " tab
@@ -113,42 +112,20 @@ syntax on
 
 " vim-airline
 set laststatus=2
-let g:airline_theme='molokai'
+let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts=1
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{&filetype}'
-let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#virtualenv#enabled = 1
 
 
-" ale
-let g:ale_sign_column_always=1
-let g:ale_lint_on_save=1
-let g:ale_lint_on_text_changed=0
-let g:ale_lint_on_enter=0
-let g:ale_fix_on_save = 0
-let g:ale_echo_msg_format = '[%linter%]%code: %%s'
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nnoremap <Leader>h :ALEFix<CR>
-let g:ale_linters = {
-    \ 'python': ['flake8'],
-    \ 'rust': ['rustc', 'cargo'],
-    \ 'clojure': ['clj-kondo'],
-    \ }
-let g:ale_fixers = {
-    \ 'python': ['autopep8', 'black', 'isort'],
-    \ 'rust': ['rustfmt'],
-    \ 'clojure': ['clj-kondo'],
-    \ }
-
-
 " nerdtree
-nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>b :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
 
 
@@ -174,6 +151,18 @@ let g:ctrlp_extensions = ['tag']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
 
 
+" vim-easymotion
+nmap <Leader>s <Plug>(easymotion-s2)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+nmap g/ <Plug>(easymotion-sn)
+
+
+" expand region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+
 " asyncomplete
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -182,11 +171,20 @@ imap <C-e> <Plug>(asyncomplete_force_refresh)
 
 
 " vim-lsp
-let g:lsp_diagnostics_enabled = 0
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_virtual_text_enabled = 1
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '‼'}
+let g:lsp_signs_information = {'text': 'i'}
+let g:lsp_signs_hint = {'text': '?'}
 nnoremap <C-]> :<C-u>LspDefinition<CR>
 nnoremap K :<C-u>LspHover<CR>
 nnoremap <Leader>R :<C-u>LspRename<CR>
 nnoremap <Leader>n :<C-u>LspReferences<CR>
+nnoremap <Leader>f :<C-u>LspDocumentDiagnostics<CR>
+nnoremap <Leader>g :<C-u>LspDocumentFormat<CR>
 
 
 " load own vimrc
