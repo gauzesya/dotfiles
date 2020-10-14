@@ -1,7 +1,7 @@
 ﻿" .vimrc
 
 " requirements
-" curl, git, powerline_font
+" curl, powerline_font
 
 
 " plugin
@@ -13,23 +13,37 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" looking
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
-Plug 'thinca/vim-quickrun'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
+
+" edit support
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'cohama/lexima.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 
+" file operation
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'thinca/vim-quickrun'
+
+" lsp
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" others
 Plug 'jmcantrell/vim-virtualenv'
 
 call plug#end()
@@ -99,15 +113,21 @@ nnoremap <silent>sk <c-w>k
 nnoremap <silent>sl <c-w>l
 
 
+" other
+set backspace=indent,eol,start
+
+
 " colorscheme
 set background=dark
+syntax on
+set t_Co=256
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
 try
   colorscheme onedark
 catch
   colorscheme elflord
 endtry
-set t_Co=256
-syntax on
 
 
 " vim-airline
@@ -125,7 +145,7 @@ let g:airline#extensions#virtualenv#enabled = 1
 
 
 " nerdtree
-nnoremap <Leader>b :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
 
 
@@ -183,7 +203,7 @@ nnoremap <C-]> :<C-u>LspDefinition<CR>
 nnoremap K :<C-u>LspHover<CR>
 nnoremap <Leader>R :<C-u>LspRename<CR>
 nnoremap <Leader>n :<C-u>LspReferences<CR>
-nnoremap <Leader>f :<C-u>LspDocumentDiagnostics<CR>
+nnoremap <Leader>b :<C-u>LspDocumentDiagnostics<CR>
 nnoremap <Leader>g :<C-u>LspDocumentFormat<CR>
 
 
