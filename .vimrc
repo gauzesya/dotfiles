@@ -48,7 +48,6 @@ Plug 'jmcantrell/vim-virtualenv'
 
 call plug#end()
 
-
 " leader
 let mapleader="\<Space>"
 
@@ -88,14 +87,12 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 set noerrorbells
 set vb t_vb=
 
-
 " no auto-commentout
 augroup auto_comment_off
   autocmd!
   autocmd BufEnter * setlocal formatoptions-=r
   autocmd BufEnter * setlocal formatoptions-=o
 augroup END
-
 
 " move
 nnoremap j gj
@@ -112,10 +109,8 @@ nnoremap <silent>sj <c-w>j
 nnoremap <silent>sk <c-w>k
 nnoremap <silent>sl <c-w>l
 
-
 " other
 set backspace=indent,eol,start
-
 
 " colorscheme
 set background=dark
@@ -129,25 +124,19 @@ catch
   colorscheme elflord
 endtry
 
-
 " vim-airline
 set laststatus=2
 let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts=1
-let g:airline_section_c = '%t'
-let g:airline_section_x = '%{&filetype}'
 let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#virtualenv#enabled = 1
 
-
 " nerdtree
 nnoremap <Leader>f :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
-
 
 " vim-quickrun
 nnoremap <silent> <Leader>q :QuickRun<CR>
@@ -159,7 +148,6 @@ let g:quickrun_config = {
 \   },
 \}
 
-
 " ctrlp
 let g:ctrlp_map = '<Nop>'
 nnoremap sb :<C-u>CtrlPBuffer<CR>
@@ -170,25 +158,21 @@ let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
 
-
 " vim-easymotion
 nmap <Leader>s <Plug>(easymotion-s2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 nmap g/ <Plug>(easymotion-sn)
 
-
 " expand region
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
-
 
 " asyncomplete
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 imap <C-e> <Plug>(asyncomplete_force_refresh)
-
 
 " vim-lsp
 let g:lsp_signs_enabled = 1
@@ -205,7 +189,6 @@ nnoremap <Leader>R :<C-u>LspRename<CR>
 nnoremap <Leader>n :<C-u>LspReferences<CR>
 nnoremap <Leader>b :<C-u>LspDocumentDiagnostics<CR>
 nnoremap <Leader>g :<C-u>LspDocumentFormat<CR>
-
 
 " load own vimrc
 if filereadable(expand('~/.vimrc.local'))
