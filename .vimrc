@@ -23,9 +23,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
 
 " file operation
 Plug 'ctrlpvim/ctrlp.vim'
