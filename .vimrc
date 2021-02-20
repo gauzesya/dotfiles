@@ -3,7 +3,6 @@
 " requirements
 " curl, powerline_font
 
-
 " plugin
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -21,7 +20,6 @@ Plug 'ryanoasis/vim-devicons'
 
 " edit support
 Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 
@@ -114,8 +112,6 @@ set backspace=indent,eol,start
 set background=dark
 syntax on
 set t_Co=256
-autocmd ColorScheme * highlight Normal ctermbg=none
-autocmd ColorScheme * highlight LineNr ctermbg=none
 try
   colorscheme onedark
 catch
@@ -124,7 +120,7 @@ endtry
 
 " vim-airline
 set laststatus=2
-let g:airline_theme='bubblegum'
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#branch#enabled=1
@@ -157,36 +153,50 @@ let g:ctrlp_extensions = ['tag']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
 
 " vim-easymotion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
 nmap <Leader>s <Plug>(easymotion-s2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 nmap g/ <Plug>(easymotion-sn)
 
-" expand region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+" asyncomplete & vim-lsp
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
 
-" asyncomplete
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-imap <C-e> <Plug>(asyncomplete_force_refresh)
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+    let g:lsp_format_sync_timeout = 1000
+endfunction
 
-" vim-lsp
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_popup_delay = 200
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_virtual_text_enabled = 1
-let g:lsp_signs_error = {'text': '✗'}
-let g:lsp_signs_warning = {'text': '‼'}
-let g:lsp_signs_information = {'text': 'i'}
-let g:lsp_signs_hint = {'text': '?'}
-nnoremap <C-]> :<C-u>LspDefinition<CR>
-nnoremap K :<C-u>LspHover<CR>
-nnoremap <Leader>R :<C-u>LspRename<CR>
-nnoremap <Leader>n :<C-u>LspReferences<CR>
-nnoremap <Leader>b :<C-u>LspDocumentDiagnostics<CR>
-nnoremap <Leader>g :<C-u>LspDocumentFormat<CR>
+let g:lsp_diagnostics_signs_error = {'text': '✗'}
+let g:lsp_diagnostics_signs_warning = {'text': '‼'}
+let g:lsp_diagnostics_signs_information = {'text': 'i'}
+let g:lsp_diagnostics_signs_hint = {'text': '?'}
 
 " load own vimrc
 if filereadable(expand('~/.vimrc.local'))
