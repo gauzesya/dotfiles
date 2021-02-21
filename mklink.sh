@@ -14,6 +14,11 @@ for f in .??*; do
     [ "$f" = ".git" ] && continue
     [ "$f" = ".DS_Store" ] && continue
 
+    if [ -d ~/"$f" ] && [ ! -L ~/"$f" ]; then
+      mv ~/"$f"/* ~/dotfiles/"$f"/
+      rm -rf ~/"$f"
+    fi
+
     ln -snfv ~/dotfiles/"$f" ~/
 done
 
