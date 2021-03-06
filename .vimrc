@@ -28,6 +28,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'thinca/vim-quickrun'
 
+" highlight
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 " lsp
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
@@ -70,6 +74,9 @@ set list listchars=tab:\?\-
 set expandtab
 set tabstop=2
 set shiftwidth=2
+
+" indent
+set smartindent
 
 " search
 set ignorecase
@@ -197,6 +204,8 @@ let g:lsp_diagnostics_signs_error = {'text': '✗'}
 let g:lsp_diagnostics_signs_warning = {'text': '‼'}
 let g:lsp_diagnostics_signs_information = {'text': 'i'}
 let g:lsp_diagnostics_signs_hint = {'text': '?'}
+
+let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-language-server']
 
 " load own vimrc
 if filereadable(expand('~/.vimrc.local'))
