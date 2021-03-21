@@ -1,7 +1,7 @@
 ﻿" .vimrc
 
 " requirements
-" curl, powerline_font
+" curl, powerline_font, fzf
 
 " plugin
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -22,6 +22,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
 
 " file operation
 Plug 'ctrlpvim/ctrlp.vim'
@@ -166,6 +169,11 @@ nmap <Leader>s <Plug>(easymotion-s2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 nmap g/ <Plug>(easymotion-sn)
+
+" Vista
+let g:vista_default_executive = 'vim_lsp'
+nnoremap <Leader>t :Vista!!<CR>
+nnoremap <Leader>r :Vista finder<CR>
 
 " asyncomplete & vim-lsp
 function! s:on_lsp_buffer_enabled() abort
