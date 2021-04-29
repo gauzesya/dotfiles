@@ -42,9 +42,6 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 
-" linter & formatter
-Plug 'dense-analysis/ale'
-
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -190,6 +187,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> gi <plug>(lsp-implementation)
     nmap <buffer> gt <plug>(lsp-type-definition)
     nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
 
     inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -205,18 +204,15 @@ augroup END
 
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_popup_delay = 200
-let g:lsp_signs_enabled = 0
-let g:lsp_diagnostics_enabled = 0
-
-" ale
-let g:ale_linters = {
-      \ 'python': ['flake8'],
-      \}
-let g:ale_fixers = {
-      \ 'python': ['autopep8', 'black', 'isort'],
-      \}
-let g:ale_sign_column_always = 1
-nmap <silent> <leader>af <Plug>(ale_fix)
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_virtual_text_enabled = 1
+let g:lsp_diagnostics_signs_error = {'text': '✗'}
+let g:lsp_diagnostics_signs_warning = {'text': '‼'}
+let g:lsp_diagnostics_signs_information = {'text': 'i'}
+let g:lsp_diagnostics_signs_hint = {'text': '?'}
+let g:lsp_document_code_action_signs_enabled = 0
 
 " load own vimrc
 if filereadable(expand('~/.vimrc.local'))
