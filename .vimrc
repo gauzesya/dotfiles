@@ -207,15 +207,21 @@ let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_popup_delay = 200
 let g:lsp_signs_enabled = 0
 let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
 
 " ale
 let g:ale_linters = {
-      \ 'python': ['flake8'],
+      \ 'python': ['flake8', 'mypy'],
+      \ 'typescript': ['eslint'],
       \}
 let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'python': ['autopep8', 'black', 'isort'],
+      \ 'typescript': ['eslint', 'prettier'],
+      \ 'typescriptreact': ['eslint', 'prettier'],
       \}
 let g:ale_sign_column_always = 1
+let g:ale_change_sign_column_color = 1
 nmap <silent> <leader>af <Plug>(ale_fix)
 
 " load own vimrc
