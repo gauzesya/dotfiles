@@ -157,9 +157,8 @@ let g:quickrun_config = {
 
 " ctrlp
 let g:ctrlp_map = '<Nop>'
-nnoremap sb :<C-u>CtrlPBuffer<CR>
+nnoremap st :<C-u>CtrlPBuffer<CR>
 nnoremap sf :<C-u>CtrlP<CR>
-nnoremap st :<C-u>CtrlPTag<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_extensions = ['tag']
