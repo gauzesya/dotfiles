@@ -49,6 +49,11 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" clojure
+Plug 'guns/vim-sexp', {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
+
 " others
 Plug 'jmcantrell/vim-virtualenv'
 
@@ -222,6 +227,9 @@ let g:ale_fixers = {
 let g:ale_sign_column_always = 1
 let g:ale_change_sign_column_color = 1
 nmap <silent> <leader>af <Plug>(ale_fix)
+
+" vim-iced
+let g:iced_enable_default_key_mappings = v:true
 
 " load own vimrc
 if filereadable(expand('~/.vimrc.local'))

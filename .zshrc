@@ -85,6 +85,9 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
+# vim-iced
+export PATH=$PATH:~/.vim/plugged/vim-iced/bin
+
 # tmux
 PERCOL='fzf'
 if [[ ! -n $TMUX ]]; then
