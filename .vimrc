@@ -40,7 +40,6 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mattn/vim-lsp-settings'
 
 " linter & formatter
 Plug 'dense-analysis/ale'
@@ -196,9 +195,6 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> <leader>rn <plug>(lsp-rename)
     nmap <buffer> K <plug>(lsp-hover)
 
-    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
     let g:lsp_format_sync_timeout = 1000
 endfunction
 
@@ -213,6 +209,25 @@ let g:lsp_signs_enabled = 0
 let g:lsp_diagnostics_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+if executable('typescript-language-server')
+    " npm install -g typescript-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact'],
+        \ })
+endif
+
 " ale
 let g:ale_linters = {
       \ 'python': ['flake8', 'mypy'],
@@ -226,7 +241,7 @@ let g:ale_fixers = {
       \}
 let g:ale_sign_column_always = 1
 let g:ale_change_sign_column_color = 1
-nmap <silent> <leader>af <Plug>(ale_fix)
+nmap <silent> =G <Plug>(ale_fix)
 
 " vim-iced
 let g:iced_enable_default_key_mappings = v:true
