@@ -18,6 +18,7 @@ autoload -Uz _zinit
 ### Plugins
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
+zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit load zdharma/fast-syntax-highlighting
 fast-theme -q clean
@@ -33,6 +34,11 @@ setopt no_beep
 #
 export EDITOR="nvim"
 export PATH="${HOME}/bin:${PATH}"
+
+#
+# Completion
+#
+autoload -Uz compinit && compinit
 
 #
 # History
