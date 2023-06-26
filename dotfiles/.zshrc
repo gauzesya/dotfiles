@@ -67,7 +67,16 @@ bindkey '^F' autosuggest-accept
 #
 alias v="nvim"
 alias vim="nvim"
-alias ls="ls --color=auto --file-type"
+case ${OSTYPE} in
+	darwin*)
+		#mac
+        alias ls="ls -G"
+		;;
+	linux*)
+		#linux
+        alias ls="ls --color=auto --file-type"
+		;;
+esac
 alias la="ls -a"
 alias ll="ls -al"
 alias -g G="| grep"
