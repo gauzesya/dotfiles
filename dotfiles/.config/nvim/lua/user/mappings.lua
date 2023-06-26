@@ -1,6 +1,16 @@
 return {
   n = {
-    ["L"] = { "<cmd>bnext<cr>", desc = "Next Buffer" },
-    ["H"] = { "<cmd>bprevious<cr>", desc = "Previous Buffer" },
+    ["L"] = {
+      function()
+        require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
+      end,
+      desc = "Next buffer",
+    },
+    ["H"] = {
+      function()
+        require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1))
+      end,
+      desc = "Previous buffer",
+    },
   },
 }
