@@ -9,7 +9,8 @@ My dotfiles
 
 ### Install
 
-```
+```sh
 git clone https://github.com/gauzesya/dotfiles.git ~/dotfiles
+bash ~/dotfiles/install.sh
 bash ~/dotfiles/setup.sh -y
 ```
