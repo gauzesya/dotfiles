@@ -12,7 +12,12 @@ return {
         "lua_ls",
         -- python
         "ruff_lsp",
-        "pylsp",
+        -- rust
+        "rust_analyzer",
+        -- typescript
+        "biome",
+        -- clojure
+        "clojure_lsp",
         -- add more arguments for adding more language servers
       },
     },
@@ -23,7 +28,10 @@ return {
     -- overrides `require("mason-null-ls").setup(...)`
     opts = {
       ensure_installed = {
+        -- lua
         "stylua",
+        -- clojure
+        "cljfmt",
         -- add more arguments for adding more null-ls sources
       },
     },

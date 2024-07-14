@@ -8,6 +8,10 @@ return {
       "lua",
       "vim",
       "python",
+      "rust",
+      "javascript",
+      "typescript",
+      "clojure",
       -- add more arguments for adding more treesitter parsers
     },
   },
