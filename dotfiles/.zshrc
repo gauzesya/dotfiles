@@ -83,11 +83,14 @@ alias -g G="| grep"
 alias -g L="| less"
 
 #
+# Envs
+#
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/bin:${PATH}"
+
+#
 # Tool settings
 #
-
-# Python
-source "${HOME}/.rye/env"
 
 # Rust
 export PATH="${CARGO_HOME}/bin:${PATH}"

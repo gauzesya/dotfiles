@@ -11,7 +11,8 @@ return {
         -- lua
         "lua_ls",
         -- python
-        "ruff_lsp",
+        "ruff",
+        "pyright",
         -- rust
         "rust_analyzer",
         -- typescript

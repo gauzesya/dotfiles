@@ -14,17 +14,6 @@ return {
       -- Set a formatter
       -- null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.formatting.prettier,
-
-      -- for python (venv)
-      null_ls.builtins.diagnostics.mypy.with {
-        only_local = "./.venv/bin",
-      },
-      null_ls.builtins.formatting.black.with {
-        only_local = "./.venv/bin",
-      },
-      null_ls.builtins.formatting.isort.with {
-        only_local = "./.venv/bin",
-      },
     }
     return config -- return final config table
   end,
