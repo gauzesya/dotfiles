@@ -1,0 +1,4 @@
+[tools]
+fzf = "latest"
+rust = "latest"
+uv = "latest"

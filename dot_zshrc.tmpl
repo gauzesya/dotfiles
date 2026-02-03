@@ -1,0 +1,69 @@
+# Zinit & Plugins
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+zinit light hlissner/zsh-autopair
+zinit light Aloxaf/fzf-tab
+zinit load zdharma/fast-syntax-highlighting
+fast-theme -q clean
+
+# Shell Options
+setopt no_beep
+setopt correct
+autoload -Uz compinit && compinit
+
+# History
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=100000
+setopt hist_ignore_all_dups
+setopt share_history
+
+# Key Bindings
+bindkey -v
+bindkey '^[[91;5u' vi-cmd-mode
+bindkey '^F' autosuggest-accept
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# Aliases
+alias v="nvim"
+alias vim="nvim"
+{{ if eq .chezmoi.os "darwin" -}}
+alias ls="ls -G"
+{{ else if eq .chezmoi.os "linux" -}}
+alias ls="ls --color=auto --file-type"
+{{ end -}}
+alias la="ls -a"
+alias ll="ls -al"
+alias -g G="| grep"
+alias -g L="| less"
+
+# PATH
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/bin:${PATH}"
+
+# Tools
+export EDITOR="nvim"
+eval "$(mise activate zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Local
+if [ -e "${HOME}/.zshrc.local" ]; then
+  source "${HOME}/.zshrc.local"
+fi
