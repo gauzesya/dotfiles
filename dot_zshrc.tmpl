@@ -61,7 +61,7 @@ export PATH="${HOME}/bin:${PATH}"
 # Tools
 export EDITOR="nvim"
 eval "$(mise activate zsh)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # Local
 if [ -e "${HOME}/.zshrc.local" ]; then
